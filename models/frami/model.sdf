@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<sdf version="1.6">
+  <model name="frami">
+    <pose>0 0 0 0 0 0</pose>
+    <static>true</static>
+    <link name="base_link">
+      <visual name="visual">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>frami.dae</uri>
+            <scale>0.46 0.46 1.0</scale>
+          </mesh>
+        </geometry>
+        <!--<material>
+          <ambient>0.3 0.3 0.3 1.0</ambient>
+          <diffuse>0.7 0.7 0.7 1.0</diffuse>
+          <specular>0.01 0.01 0.01 1.0</specular>
+        </material>-->
+      </visual>
+      <collision name="collision">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>frami.dae</uri>
+            <scale>0.46 0.46 1.0</scale>
+          </mesh>
+        </geometry>
+      </collision>
+      <inertial>
+        <mass>1.0</mass>
+        <inertia>
+            <ixx>0.001</ixx>
+            <ixy>0.0</ixy>
+            <ixz>0.0</ixz>
+            <iyy>0.001</iyy>
+            <iyz>0.0</iyz>
+            <izz>0.001</izz>
+        </inertia>
+      </inertial>
+    </link>
+  </model>
+</sdf>

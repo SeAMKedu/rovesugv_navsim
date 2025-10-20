@@ -1,0 +1,145 @@
+<?xml version="1.0"?>
+<robot name="seamk_rover" xmlns:xacro="http://wiki.ros.org/xacro">
+  <!-- Constants -->
+  <xacro:property name="base_size_x" value="0.72" />
+  <xacro:property name="base_size_y" value="0.52" />
+  <xacro:property name="base_size_z" value="0.19" />
+  <xacro:property name="base_mass" value="40.0" />
+
+  <xacro:property name="wheel_radius" value="0.21" />
+  <xacro:property name="wheel_width" value="0.16" />
+  <xacro:property name="wheel_mass" value="3.0" />
+  <xacro:property name="wheel_offset_x" value="0.22" />
+  <xacro:property name="wheel_offset_y" value="0.35" />
+
+  <!-- Inertia of a solid rectangular cuboid -->
+  <xacro:macro name="box_inertia" params="mass depth width height">
+    <inertial>
+      <mass value="${mass}" />
+      <inertia ixx="${(mass/12) * (width*width + height*height)}" 
+               ixy="0" 
+               ixz="0" 
+               iyy="${(mass/12) * (depth*depth + height*height)}" 
+               iyz="0" 
+               izz="${(mass/12) * (depth*depth + width*width)}"/>
+    </inertial>
+  </xacro:macro>
+
+  <!-- Inertia of a solid cylinder -->
+  <xacro:macro name="cylinder_inertia" params="mass radius height">
+    <inertial>
+      <origin xyz="0 0 0" rpy="${pi/2} 0 0" />
+      <mass value="${mass}" />
+      <inertia ixx="${(mass/12) * (3*radius*radius + height*height)}" 
+               ixy="0" 
+               ixz="0" 
+               iyy="${(mass/12) * (3*radius*radius + height*height)}" 
+               iyz="0" 
+               izz="${(mass/2) * (radius*radius)}"/>
+    </inertial>
+  </xacro:macro>
+
+  <!-- Base footprint -->
+  <link name="base_footprint" />
+
+  <joint name="base_joint" type="fixed">
+    <parent link="base_footprint" />
+    <child link="base_link" />
+    <origin xyz="0 0 ${wheel_radius}" rpy="0 0 0" />
+  </joint>
+
+  <!-- Rover base -->
+  <link name="base_link">
+    <xacro:box_inertia mass="${base_mass}" 
+                       depth="${base_size_x}" 
+                       width="${base_size_y}" 
+                       height="${base_size_z}" />
+    <collision name="base_collision">
+      <origin xyz="0 0 0.055" rpy="0 0 0" />
+      <geometry>
+        <box size="${base_size_x} ${base_size_y} ${base_size_z}" />
+      </geometry>
+    </collision>
+    <visual name="base_visual">
+      <origin xyz="0 0 0" rpy="0 0 ${pi}" />
+      <geometry>
+        <mesh filename="file://$(find rovesugv_navsim)/models/rover/RoverBase.dae" />
+      </geometry>
+    </visual>
+  </link>
+
+  <!-- Rover wheels -->
+  <xacro:macro name="wheel" params="prefix mount_point_x mount_point_y">
+    <joint name="${prefix}_joint" type="revolute">
+      <parent link="base_link" />
+      <child link="${prefix}_link" />
+      <origin xyz="${mount_point_x} ${mount_point_y} 0" rpy="0 0 0" />
+      <axis xyz="0 1 0" />
+      <limit lower="1e12" upper="1e12" effort="30" velocity="6.3"/>
+    </joint>
+
+    <link name="${prefix}_link">
+      <xacro:cylinder_inertia mass="${wheel_mass}" 
+                              radius="${wheel_radius}" 
+                              height="${wheel_width}" />
+      <collision name="${prefix}_collision">
+        <origin xyz="0 0 0" rpy="${pi/2} 0 0" />
+        <geometry>
+          <cylinder radius="${wheel_radius}" length="${wheel_width}" />
+        </geometry>
+      </collision>
+      <visual name="${prefix}_visual">
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="file://$(find rovesugv_navsim)/models/rover/RoverWheel.dae" />
+        </geometry>
+      </visual>
+    </link>
+  </xacro:macro>
+
+  <xacro:wheel 
+    prefix="fl_wheel" 
+    mount_point_x="${wheel_offset_x}" 
+    mount_point_y="${wheel_offset_y}" />
+  <xacro:wheel 
+    prefix="fr_wheel" 
+    mount_point_x="-${wheel_offset_x}" 
+    mount_point_y="${wheel_offset_y}" />
+  <xacro:wheel 
+    prefix="rl_wheel" 
+    mount_point_x="${wheel_offset_x}" 
+    mount_point_y="-${wheel_offset_y}" />
+  <xacro:wheel 
+    prefix="rr_wheel" 
+    mount_point_x="-${wheel_offset_x}" 
+    mount_point_y="-${wheel_offset_y}" />
+  
+  <!-- IMU -->
+  <joint name="imu_joint" type="fixed">
+    <parent link="base_link" />
+    <child link="imu_link" />
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <axis xyz="0 0 1" />
+  </joint>
+
+  <link name="imu_link" />
+
+  <!-- Lidar -->
+  <joint name="scan_joint" type="fixed">
+    <parent link="base_link" />
+    <child link="scan_link" />
+    <origin xyz="0 0 0.3" rpy="0 0 0" />
+  </joint>
+
+  <link name="scan_link" />
+
+  <!-- GPS -->
+  <joint name="gps_joint" type="fixed">
+    <parent link="base_link" />
+    <child link="gps_link" />
+    <origin xyz="0 0 0.1" rpy="0 0 0" />
+  </joint>
+
+  <link name="gps_link" />
+
+</robot>

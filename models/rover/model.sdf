@@ -1,0 +1,441 @@
+<?xml version="1.0"?>
+<sdf version="1.8">
+  <model name="rover">
+    <link name="base_footprint" />
+    
+    <joint name="base_joint" type="fixed">
+      <parent>base_footprint</parent>
+      <child>base_link</child>
+      <pose>0 0 0.21 0 0 0</pose>
+    </joint>
+    
+    <link name="base_link">
+    <inertial>
+      <mass>40.0</mass>
+      <pose>0 0 0.21 0 0 0</pose>
+      <inertia>
+        <ixx>1.848333</ixx>
+        <ixy>0.0</ixy>
+        <ixz>0.0</ixz>
+        <iyy>2.561333</iyy>
+        <iyz>0.0</iyz>
+        <izz>0.953667</izz>
+      </inertia>
+    </inertial>
+    <collision name="base_collision">
+      <pose>0 0 0.265 0 0 0</pose>
+      <geometry>
+      <box>
+        <size>0.72 0.50 0.19</size>
+      </box>
+      </geometry>
+    </collision>
+    <visual name="base_visual">
+      <pose>0 0 0.21 0 0 3.141592654</pose>
+      <geometry>
+        <mesh>
+          <uri>RoverBase.dae</uri>
+        </mesh>
+      </geometry>
+    </visual>
+    </link>
+
+    <joint name="fl_wheel_joint" type="revolute">
+      <parent>base_link</parent>
+      <child>fl_wheel_link</child>
+      <pose>0.22 0.35 0.21 0 0 0</pose>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <dynamics>
+          <friction>0.001</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffnes>0</spring_stiffnes>
+        </dynamics>
+      </axis>
+    </joint>
+
+    <joint name="fr_wheel_joint" type="revolute">
+      <parent>base_link</parent>
+      <child>fr_wheel_link</child>
+      <pose>0.22 -0.35 0.21 0 0 0</pose>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <dynamics>
+          <friction>0.001</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffnes>0</spring_stiffnes>
+        </dynamics>
+      </axis>
+    </joint>
+
+    <joint name="rl_wheel_joint" type="revolute">
+      <parent>base_link</parent>
+      <child>rl_wheel_link</child>
+      <pose>-0.22 0.35 0.21 0 0 0</pose>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <dynamics>
+          <friction>0.001</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffnes>0</spring_stiffnes>
+        </dynamics>
+      </axis>
+    </joint>
+
+    <joint name="rr_wheel_joint" type="revolute">
+      <parent>base_link</parent>
+      <child>rr_wheel_link</child>
+      <pose>-0.22 -0.35 0.21 0 0 0</pose>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <dynamics>
+          <friction>0.001</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffnes>0</spring_stiffnes>
+        </dynamics>
+      </axis>
+    </joint>
+
+    <link name="fl_wheel_link">
+      <inertial>
+        <mass>3.0</mass>
+        <pose>0.22 0.35 0.21 1.57 0 0</pose>
+        <inertia>
+          <ixx>0.039475</ixx>
+          <ixy>0.0</ixy>
+          <ixz>0.0</ixz>
+          <iyy>0.039475</iyy>
+          <iyz>0.0</iyz>
+          <izz>0.066150</izz>
+        </inertia>
+      </inertial>
+      <collision name="fl_wheel_collision">
+        <pose>0.22 0.35 0.21 1.57 0 0</pose>
+        <geometry>
+        <cylinder>
+          <radius>0.21</radius>
+          <length>0.01</length>
+        </cylinder>
+        </geometry>
+      </collision>
+      <visual name="fl_wheel_visual">
+        <pose>0.22 0.35 0.21 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>RoverWheel.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+
+    <link name="fr_wheel_link">
+      <inertial>
+        <mass>3.0</mass>
+        <pose>0.22 -0.35 0.21 1.57 0 0</pose>
+        <inertia>
+          <ixx>0.039475</ixx>
+          <ixy>0.0</ixy>
+          <ixz>0.0</ixz>
+          <iyy>0.039475</iyy>
+          <iyz>0.0</iyz>
+          <izz>0.066150</izz>
+        </inertia>
+      </inertial>
+      <collision name="fr_wheel_collision">
+        <pose>0.22 -0.35 0.21 1.57 0 0</pose>
+        <geometry>
+        <cylinder>
+          <radius>0.21</radius>
+          <length>0.01</length>
+        </cylinder>
+        </geometry>
+      </collision>
+      <visual name="fr_wheel_visual">
+        <pose>0.22 -0.35 0.21 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>RoverWheel.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+
+    <link name="rl_wheel_link">
+      <inertial>
+        <mass>3.0</mass>
+        <pose>-0.22 0.35 0.21 1.57 0 0</pose>
+        <inertia>
+          <ixx>0.039475</ixx>
+          <ixy>0.0</ixy>
+          <ixz>0.0</ixz>
+          <iyy>0.039475</iyy>
+          <iyz>0.0</iyz>
+          <izz>0.066150</izz>
+          </inertia>
+      </inertial>
+      <collision name="rl_wheel_collision">
+        <pose>-0.22 0.35 0.21 1.57 0 0</pose>
+        <geometry>
+        <cylinder>
+          <radius>0.21</radius>
+          <length>0.01</length>
+        </cylinder>
+        </geometry>
+      </collision>
+      <visual name="rl_wheel_visual">
+        <pose>-0.22 0.35 0.21 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>RoverWheel.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+
+    <link name="rr_wheel_link">
+      <inertial>
+        <mass>3.0</mass>
+        <pose>-0.22 -0.35 0.21 1.57 0 0</pose>
+        <inertia>
+          <ixx>0.039475</ixx>
+          <ixy>0.0</ixy>
+          <ixz>0.0</ixz>
+          <iyy>0.039475</iyy>
+          <iyz>0.0</iyz>
+          <izz>0.066150</izz>
+        </inertia>
+      </inertial>
+      <collision name="rr_wheel_collision">
+        <pose>-0.22 -0.35 0.21 1.57 0 0</pose>
+        <geometry>
+        <cylinder>
+          <radius>0.21</radius>
+          <length>0.01</length>
+        </cylinder>
+        </geometry>
+      </collision>
+      <visual name="rr_wheel_visual">
+        <pose>-0.22 -0.35 0.21 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>RoverWheel.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+
+    <!-- IMU -->
+    <joint name="imu_joint" type="fixed">
+      <parent>base_link</parent>
+      <child>imu_link</child>
+      <pose>0 0 0.21 0 0 0</pose>
+      <axis>
+        <xyz>0 0 1</xyz>
+      </axis>
+    </joint>
+
+    <link name="imu_link">
+      <inertial>
+        <mass>0.125</mass>
+        <pose>0 0 0.21 0 0 0</pose>
+        <inertia>
+          <ixx>0.001</ixx>
+          <ixy>0.000</ixy>
+          <ixz>0.000</ixz>
+          <iyy>0.001</iyy>
+          <iyz>0.000</iyz>
+          <izz>0.001</izz>
+        </inertia>
+      </inertial>
+    
+      <sensor name="imu_sensor" type="imu">
+        <always_on>true</always_on>
+        <update_rate>100</update_rate>
+        <topic>imu</topic>
+        <gz_frame_id>imu_link</gz_frame_id>
+        <imu>
+          <angular_velocity>
+            <x>
+              <noise type="gaussian">
+                <mean>0.0</mean>
+                <stddev>2e-4</stddev>
+              </noise>
+            </x>
+            <y>
+              <noise type="gaussian">
+                <mean>0.0</mean>
+                <stddev>2e-4</stddev>
+              </noise>
+            </y>
+            <z>
+              <noise type="gaussian">
+                <mean>0.0</mean>
+                <stddev>2e-4</stddev>
+              </noise>
+            </z>
+          </angular_velocity>
+          <linear_acceleration>
+            <x>
+              <noise type="gaussian">
+                <mean>0.0</mean>
+                <stddev>1.7e-2</stddev>
+              </noise>
+            </x>
+            <y>
+              <noise type="gaussian">
+                <mean>0.0</mean>
+                <stddev>1.7e-2</stddev>
+              </noise>
+            </y>
+            <z>
+              <noise type="gaussian">
+                <mean>0.0</mean>
+                <stddev>1.7e-2</stddev>
+              </noise>
+            </z>
+          </linear_acceleration>
+        </imu>
+      </sensor>
+    </link>
+
+    <!-- Lidar -->
+    <joint name="scan_joint" type="fixed">
+      <parent>base_link</parent>
+      <child>scan_link</child>
+      <pose>0 0 0.51 0 0 0</pose>
+      <axis>
+        <xyz>0 0 1</xyz>
+      </axis>
+    </joint>
+
+    <link name="scan_link">
+      <inertial>
+        <mass>0.125</mass>
+        <pose>0 0 0.51 0 0 0</pose>
+        <inertia>
+          <ixx>0.001</ixx>
+          <ixy>0.000</ixy>
+          <ixz>0.000</ixz>
+          <iyy>0.001</iyy>
+          <iyz>0.000</iyz>
+          <izz>0.001</izz>
+        </inertia>
+      </inertial>
+
+      <sensor name="gpu_lidar" type="gpu_lidar">
+        <always_on>true</always_on>
+        <update_rate>10</update_rate>
+        <visualize>true</visualize>
+        <topic>scan</topic>
+        <pose>0 0 0.51 0 0 0</pose>
+        <gz_frame_id>scan_link</gz_frame_id>
+        <ray>
+          <scan>
+            <horizontal>
+              <samples>360</samples>
+              <resolution>1.0</resolution>
+              <min_angle>0.00</min_angle>
+              <max_angle>6.28</max_angle>
+            </horizontal>
+            <vertical>
+              <samples>1</samples>
+              <resolution>1.0</resolution>
+              <min_angle>0.0</min_angle>
+              <max_angle>0.0</max_angle>
+            </vertical>
+          </scan>
+          <range>
+            <min>0.10</min>
+            <max>20.0</max>
+            <resolution>0.01</resolution>
+          </range>
+          <noise>
+            <type>gaussian</type>
+            <mean>0.0</mean>
+            <stddev>0.01</stddev>
+          </noise>
+        </ray>
+      </sensor>
+    </link>
+
+    <!-- GPS -->
+    <joint name="gps_joint" type="fixed">
+      <parent>base_link</parent>
+      <child>gps_link</child>
+      <pose>0 0 0.31 0 0 0</pose>
+      <axis>
+        <xyz>0 0 1</xyz>
+      </axis>
+    </joint>
+
+    <link name="gps_link">
+      <inertial>
+        <mass>0.1</mass>
+        <pose>0 0 0.31 0 0 0</pose>
+        <inertia>
+          <ixx>0.000166667</ixx>
+          <iyy>0.000166667</iyy>
+          <izz>0.000166667</izz>
+        </inertia>
+      </inertial>
+      
+      <sensor name="navsat" type="navsat">
+        <always_on>true</always_on>
+        <update_rate>1</update_rate>
+        <topic>gps/fix</topic>
+        <pose>0 0 0.31 0 0 0</pose>
+        <gz_frame_id>gps_link</gz_frame_id>
+        <!--
+        <navsat>
+          <position_sensing>
+            <horizontal>
+              <noise type="gaussian">
+                <mean>0.0</mean>
+                <stddev>0.01</stddev>
+              </noise>
+            </horizontal>
+            <vertical>
+              <noise type="gaussian">
+                <mean>0.0</mean>
+                <stddev>0.01</stddev>
+              </noise>
+            </vertical>
+          </position_sensing>
+        </navsat>
+        -->
+      </sensor>
+    </link>
+
+    <!-- https://gazebosim.org/api/gazebo/6/classignition_1_1gazebo_1_1systems_1_1DiffDrive.html -->
+    <plugin 
+      filename="libignition-gazebo-diff-drive-system.so" 
+      name="ignition::gazebo::systems::DiffDrive">
+      <!-- wheels -->
+      <left_joint>fl_wheel_joint</left_joint>
+      <right_joint>fr_wheel_joint</right_joint>
+      <left_joint>rl_wheel_joint</left_joint>
+      <right_joint>rr_wheel_joint</right_joint>
+      <!-- kinematics -->
+      <wheel_separation>0.70</wheel_separation>
+      <wheel_radius>0.21</wheel_radius>
+      <!-- limits -->
+      <max_acceleration>1.5</max_acceleration>
+      <!-- input -->
+      <topic>/cmd_vel</topic>
+      <!-- output -->
+      <odom_topic>/odom</odom_topic>
+      <tf_topic>/tf</tf_topic>
+      <!-- origin and target of the odometry transformation -->
+      <frame_id>odom</frame_id>
+      <child_frame_id>base_footprint</child_frame_id>
+    </plugin>
+
+    <!-- RViz2 is not able to display non-fixed joints (i.e. the wheel joints) 
+         unless the state of the joints are published -->
+    <plugin 
+      filename="ignition-gazebo-joint-state-publisher-system" 
+      name="ignition::gazebo::systems::JointStatePublisher">
+      <topic>joint_states</topic>
+    </plugin>
+  </model>
+</sdf>

@@ -1,0 +1,28 @@
+docking_station:
+- latitude: 62.789252000
+  longitude: 22.821627000
+  yaw: 0.0
+
+manufacturing_lab:
+- latitude: 62.789319444
+  longitude: 22.821791111
+  yaw: 0.7853981633974483
+
+robotics_lab:
+- latitude: 62.789201667
+  longitude: 22.822063056
+  yaw: -0.7853981633974483
+
+route:
+- latitude: 62.789320278
+  longitude: 22.821959444
+  yaw: 0.0
+- latitude: 62.789247222
+  longitude: 22.822004167
+  yaw: -0.7853981633974483
+- latitude: 62.789239167
+  longitude: 22.821877778
+  yaw: 1.5707963267948966
+- latitude: 62.789309444
+  longitude: 22.821823611
+  yaw: 0.7853981633974483
