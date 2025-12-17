@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/1079652338.svg)](https://doi.org/10.5281/zenodo.17961578)
+
 ![hankelogo](/images/rovesugv_logo.png)
 
 # RovesUGV - Navsim
