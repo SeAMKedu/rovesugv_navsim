@@ -16,6 +16,7 @@ source /opt/ros/humble/setup.bash
 sudo apt install ros-humble-ros-gz
 sudo apt install ros-humble-navigation2
 sudo apt install ros-humble-nav2-bringup
+sudo apt install ros-humble-nav2-msgs
 sudo apt install ros-humble-robot-localization
 sudo apt install ros-humble-mapviz
 sudo apt install ros-humble-mapviz-plugins
