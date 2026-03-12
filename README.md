@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/1079652338.svg)](https://doi.org/10.5281/zenodo.17961578)
+
 ![hankelogo](/images/rovesugv_logo.png)
 
 # RovesUGV - Navsim
@@ -16,6 +18,7 @@ source /opt/ros/humble/setup.bash
 sudo apt install ros-humble-ros-gz
 sudo apt install ros-humble-navigation2
 sudo apt install ros-humble-nav2-bringup
+sudo apt install ros-humble-nav2-msgs
 sudo apt install ros-humble-robot-localization
 sudo apt install ros-humble-mapviz
 sudo apt install ros-humble-mapviz-plugins
