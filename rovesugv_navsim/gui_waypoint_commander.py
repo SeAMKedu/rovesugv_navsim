@@ -48,6 +48,10 @@ class WaypointRouter(Node):
         pose.pose.orientation = waypoint.orientation
 
         return pose
+    
+
+    def cancel_task(self):
+        self.navigator.cancelTask()
 
 
     def go_to_waypoint(self, waypoint: GeoPose, on_feedback, on_target):
@@ -115,11 +119,11 @@ class Application(ctk.CTk):
         self.is_task_running = False
         self.is_task_complete = False
 
-        self.button1 = ctk.CTkButton(self, text="Docking Station")
+        self.button1 = ctk.CTkButton(self, text="Home Station")
         self.button1.grid(row=0, column=0, padx=5, pady=5)
         self.button1.bind(
             LMB_PRESS, 
-            lambda event: self.navigate_to_target('docking_station')
+            lambda event: self.navigate_to_target('home_station')
         )
 
         self.button2 = ctk.CTkButton(self, text="Manufacturing Lab")
@@ -136,60 +140,71 @@ class Application(ctk.CTk):
             lambda event: self.navigate_to_target('robotics_lab')
         )
 
-        self.button4 = ctk.CTkButton(self, text="Follow Route")
-        self.button4.grid(row=0, column=3, padx=5, pady=5)
+        self.button4 = ctk.CTkButton(self, text="Robo -> Auto")
+        self.button4.grid(row=1, column=0, padx=5, pady=5)
         self.button4.bind(
             LMB_PRESS, 
-            lambda event: self.navigate_to_target('route')
+            lambda event: self.navigate_to_target('robo2auto')
         )
+
+        self.button5 = ctk.CTkButton(self, text="Auto -> Robo")
+        self.button5.grid(row=1, column=1, padx=5, pady=5)
+        self.button5.bind(
+            LMB_PRESS, 
+            lambda event: self.navigate_to_target('auto2robo')
+        )
+
+        self.button6 = ctk.CTkButton(self, text="Stop Navigation")
+        self.button6.configure(command=self.wp_router.cancel_task)
+        self.button6.grid(row=1, column=2, padx=5, pady=5)
     
         self.label01 = ctk.CTkLabel(self, width=100, text="Task Running:")
-        self.label01.grid(row=1, column=0, padx=5, pady=5)
+        self.label01.grid(row=2, column=0, padx=5, pady=5)
 
         self.label02 = ctk.CTkLabel(self, width=100, text="False")
-        self.label02.grid(row=1, column=1, padx=5, pady=5)
+        self.label02.grid(row=2, column=1, padx=5, pady=5)
 
         self.label03 = ctk.CTkLabel(self, width=100, text="Task Complete:")
-        self.label03.grid(row=2, column=0, padx=5, pady=5)
+        self.label03.grid(row=3, column=0, padx=5, pady=5)
 
         self.label04 = ctk.CTkLabel(self, width=100, text="False")
-        self.label04.grid(row=2, column=1, padx=5, pady=5)
+        self.label04.grid(row=3, column=1, padx=5, pady=5)
 
         self.label05 = ctk.CTkLabel(self, width=100, text="ETA:")
-        self.label05.grid(row=3, column=0, padx=5, pady=5)
+        self.label05.grid(row=4, column=0, padx=5, pady=5)
 
         self.label06 = ctk.CTkLabel(self, width=100, text="0 s")
-        self.label06.grid(row=3, column=1, padx=5, pady=5)
+        self.label06.grid(row=4, column=1, padx=5, pady=5)
 
         self.label07 = ctk.CTkLabel(self, width=100, text="Distance remaining:")
-        self.label07.grid(row=4, column=0, padx=5, pady=5)
+        self.label07.grid(row=5, column=0, padx=5, pady=5)
 
         self.label08 = ctk.CTkLabel(self, width=100, text="0.00 m")
-        self.label08.grid(row=4, column=1, padx=5, pady=5)
+        self.label08.grid(row=5, column=1, padx=5, pady=5)
 
         self.label09 = ctk.CTkLabel(self, width=100, text="Time taken:")
-        self.label09.grid(row=5, column=0, padx=5, pady=5)
+        self.label09.grid(row=6, column=0, padx=5, pady=5)
 
         self.label10 = ctk.CTkLabel(self, width=100, text="0 s")
-        self.label10.grid(row=5, column=1, padx=5, pady=5)
+        self.label10.grid(row=6, column=1, padx=5, pady=5)
 
         self.label11 = ctk.CTkLabel(self, width=100, text="Recoveries:")
-        self.label11.grid(row=6, column=0, padx=5, pady=5)
+        self.label11.grid(row=7, column=0, padx=5, pady=5)
 
         self.label12 = ctk.CTkLabel(self, width=100, text="0")
-        self.label12.grid(row=6, column=1, padx=5, pady=5)
+        self.label12.grid(row=7, column=1, padx=5, pady=5)
 
         self.label13 = ctk.CTkLabel(self, width=100, text="Current Waypoint:")
-        self.label13.grid(row=7, column=0, padx=5, pady=5)
+        self.label13.grid(row=8, column=0, padx=5, pady=5)
 
-        self.label14 = ctk.CTkLabel(self, width=100, text="0 / 0")
-        self.label14.grid(row=7, column=1, padx=5, pady=5)
+        self.label14 = ctk.CTkLabel(self, width=100, text="0")
+        self.label14.grid(row=8, column=1, padx=5, pady=5)
 
         self.label15 = ctk.CTkLabel(self, width=100, text="Navigation Target:")
-        self.label15.grid(row=8, column=0, padx=5, pady=5)
+        self.label15.grid(row=9, column=0, padx=5, pady=5)
 
         self.label16 = ctk.CTkLabel(self, width=100, text="")
-        self.label16.grid(row=8, column=1, padx=5, pady=5)
+        self.label16.grid(row=9, column=1, padx=5, pady=5)
 
 
     def _set_buttons_state(self, state: str):
@@ -216,7 +231,7 @@ class Application(ctk.CTk):
 
     def on_route_feedback(self, feedback: FollowWaypoints_Feedback):
         """Called when the feedback message is received."""
-        self.label14.configure(text=f'{feedback.current_waypoint+1} / 4')
+        self.label14.configure(text=f'{feedback.current_waypoint+1}')
 
 
     def on_target(self):
@@ -231,7 +246,7 @@ class Application(ctk.CTk):
         self.label08.configure(text='0.00 m')
         self.label10.configure(text='0 s')
         self.label12.configure(text='0')
-        self.label14.configure(text='0 / 0')
+        self.label14.configure(text='0')
         self.label16.configure(text='')
 
 
@@ -255,7 +270,7 @@ class Application(ctk.CTk):
             waypoint = latLonYaw2Geopose(lat, lon, yaw)
             waypoints.append(waypoint)
 
-        if target == 'route':
+        if target in ('auto2robo', 'robo2auto'):
             thread = Thread(
                 target=self.wp_router.follow_waypoints, 
                 args=(waypoints, self.on_route_feedback, self.on_target),

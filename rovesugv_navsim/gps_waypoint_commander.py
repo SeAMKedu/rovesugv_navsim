@@ -54,7 +54,7 @@ class InteractiveGpsWpCommander(Node):
         self.resp.header.frame_id = 'map'
         self.resp.header.stamp = self.get_clock().now().to_msg()
         self.resp.pose.position = future.result().map_point
-    
+
         self.navigator.goToPose(self.resp)
 
     def spin(self):
