@@ -8,7 +8,7 @@
         <pose>0 0 0 0 0 0</pose>
         <geometry>
           <mesh>
-            <uri>frami_v2.dae</uri>
+            <uri>frami.dae</uri>
             <scale>0.46 0.46 1.0</scale>
           </mesh>
         </geometry>
@@ -22,7 +22,7 @@
         <pose>0 0 0 0 0 0</pose>
         <geometry>
           <mesh>
-            <uri>frami_v2.dae</uri>
+            <uri>frami.dae</uri>
             <scale>0.46 0.46 1.0</scale>
           </mesh>
         </geometry>
