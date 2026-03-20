@@ -86,7 +86,7 @@ MapViz-sovellus näyttää mobiilirobotin sijainnin karttapohjalla. Jos "gps_way
 
 ## GUI-sovellus
 
-Python-sovellus, jolla voi ajaa mobiilirobottia ennalta määritettyihin GPS-koordinaattipisteisiin, jotka on asetettu "config"-kansiossa olevassa "gps_waypoints.yaml"-tiedostossa.
+Python-sovellus, jolla voi ajaa mobiilirobottia joko manuaalisesti yläosassa olevilla painikkeilla tai pitkin ennalta määritettyjä GPS-reittipisteitä. Reittipisteet on tallennettu "config"-kansiossa olevaan "gps_waypoints.yaml"-tiedostoon.
 
 ![gui_app](/images/gui_app.png)
 
