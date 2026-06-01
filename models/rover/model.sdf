@@ -406,6 +406,55 @@
       </sensor>
     </link>
 
+    <!-- Camera -->
+    <joint name="camera_joint" type="fixed">
+      <parent>base_link</parent>
+      <child>camera_link</child>
+      <pose>0.4 0 0.31 0 0 0</pose>
+      <axis>
+        <xyz>0 0 1</xyz>
+      </axis>
+    </joint>
+
+    <link name="camera_link">
+      <inertial>
+        <mass>0.1</mass>
+        <pose>0.4 0 0.31 0 0 0</pose>
+        <inertia>
+          <ixx>0.000166667</ixx>
+          <iyy>0.000166667</iyy>
+          <izz>0.000166667</izz>
+        </inertia>
+      </inertial>
+
+      <sensor name="camera" type="camera">
+        <always_on>true</always_on>
+        <visualize>true</visualize>
+        <update_rate>30</update_rate>
+        <topic>camera/front/image_raw</topic>
+        <gz_frame_id>camera_link</gz_frame_id>
+
+        <camera name="intel_realsense_r200">
+          <camera_info_topic>camera/front/camera_info</camera_info_topic>
+          <horizontal_fov>1.02974</horizontal_fov>
+          <image>
+            <width>320</width>
+            <height>240</height>
+            <format>R8G8B8</format>
+          </image>
+          <clip>
+            <near>0.02</near>
+            <far>300</far>
+          </clip>
+          <noise>
+            <type>gaussian</type>
+            <mean>0.0</mean>
+            <stddev>0.007</stddev>
+          </noise>
+        </camera>
+      </sensor>
+    </link>
+
     <!-- https://gazebosim.org/api/gazebo/6/classignition_1_1gazebo_1_1systems_1_1DiffDrive.html -->
     <plugin 
       filename="libignition-gazebo-diff-drive-system.so" 

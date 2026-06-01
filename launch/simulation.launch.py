@@ -149,6 +149,15 @@ def generate_launch_description():
         name="swri_transform",
         arguments=["0", "0", "0", "0", "0", "0", "map", "origin"]
     )
+    # While it is possible to use "bridge_config.yaml" for image topics, a
+    # specialized "ros_gz_image" bridge node provides a much more efficient 
+    # bridge for image topics. 
+    start_gazebo_ros_image_bridge_cmd = Node(
+        package="ros_gz_image",
+        executable="image_bridge",
+        arguments=["/camera/front/image_raw"],
+        output="screen",
+    )
 
     ld = LaunchDescription()
 
@@ -168,5 +177,7 @@ def generate_launch_description():
     ld.add_action(mapviz_node)
     ld.add_action(swri_transform_node)
     ld.add_action(static_transform_node)
+
+    ld.add_action(start_gazebo_ros_image_bridge_cmd)
 
     return ld
